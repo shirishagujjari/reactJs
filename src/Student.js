@@ -8,20 +8,27 @@ export default class Student extends Component {
             name: "sagar",
             email: "tesr@gmail.com"
         };
+        //this.handleClick = this.handleClick.bind(this);
     }
-
-    onClick = () => {
+handleClick (name, email){
+    this.setState({name: name, email: email})
+}
+    /*onClick = () => {
         this.setState({name: "rahyul", email: "tttt@gmail.com"})
     };
     onChange = (e) => {
         this.setState({name: e.target.value})
+    };*/
+
+    handleChange = (e, name) => {
+        this.setState({name: name})
     };
 
     render() {
         return (
             <div>
-                <input type={"text"} onChange={this.onChange.bind(this)} name={"name"}/>
-                <button className={"btn btn-success"} onClick={this.onClick.bind(this)}>Click Me</button>
+                <input type={"text"} onChange= { e=> this.handleChange(e, "ooooo@")} name={"name"}/>
+                <button className={"btn btn-success"} onClick = {this.handleClick.bind(this, "Shirisha", "sirisha@gmail.com")}>Click Me</button>
                 <RegularStudent name={this.state.name} email={this.state.email}/>
             </div>)
     }
