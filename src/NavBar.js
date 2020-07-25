@@ -1,59 +1,85 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import {
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Nav,
+    Collapse,
     Navbar,
+    NavbarToggler,
     NavbarBrand,
-    NavbarText,
+    Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown
+    NavLink, InputGroup, InputGroupAddon, InputGroupText, Input, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown
 } from 'reactstrap';
 
-import ButtonComponent from "./ButtonComponent";
+const NavBar = (props) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-class NavBar extends Component {
-    constructor(props) {
-        super(props)
-    }
+    const toggle = () => setIsOpen(!isOpen);
 
-    render() {
-        const {btnName} = this.props;
-        return (
-            <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">reactstrap</NavbarBrand>
-                <Nav className="mr-auto" navbar>
-                    <ButtonComponent primaryColor={"blue"} btnName={btnName}/>
-                    <NavItem>
-                        <NavLink href="/components/">Components</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">{this.props.name}</NavLink>
-                    </NavItem>
-                    <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>
-                            Options
-                        </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem>
-                                Option 1
-                            </DropdownItem>
-                            <DropdownItem>
-                                Option 2
-                            </DropdownItem>
-                            <DropdownItem divider/>
-                            <DropdownItem>
-                                Reset
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle1 = () => setDropdownOpen(prevState => !prevState);
+
+    return (
+        <div>
+            <Navbar color="dark" light>
+                <NavbarToggler onClick={toggle} className="mr-2" />
+                <NavbarBrand href="/" className="mr-auto">ZOLO</NavbarBrand>
+                <Nav>
+                    <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    All
+                                </DropdownToggle>
+                                <DropdownMenu left>
+                                    <DropdownItem header>All Categories</DropdownItem>
+                                    <DropdownItem>Books</DropdownItem>
+                                    <DropdownItem>Baby</DropdownItem>
+                                    <DropdownItem>Beauty</DropdownItem>
+                                    <DropdownItem>Clothing & Accesories</DropdownItem>
+                                    <DropdownItem>Computers & Accesories</DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+
+                        </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="search" />
+                </InputGroup>
                 </Nav>
-                <NavbarText>Simple Text</NavbarText>
             </Navbar>
-        );
-    }
+            <Navbar color="secondary" light expand="md">
+                <NavbarBrand href="/" className="mr-auto">Hello select your items</NavbarBrand>
+                <NavbarToggler onClick={toggle} className="mr-2" />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/components/">Home & Kichen</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">WomenClothes</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">MenClothes</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">Books</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">Gift Items</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">Computers</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/components/">Kids Toys</NavLink>
+                        </NavItem>
+                    </Nav>
+
+                </Collapse>
+            </Navbar>
+        </div>
+    );
+
 }
 
 export default NavBar;
